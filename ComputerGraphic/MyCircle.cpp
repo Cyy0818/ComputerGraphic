@@ -1,5 +1,4 @@
 #include "MyCircle.h"
-using namespace std;
 
 void MyCircle::CirclePoint(int x0, int y0, int x, int y, int color) {
     putpixel(x0 + x, y0 + y, color);

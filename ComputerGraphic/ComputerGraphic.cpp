@@ -5,12 +5,10 @@
 #include "Display.h"
 #include "MyLine.h"
 #include "MyCircle.h"
-#include"Drawableobj.h"
+#include "MyShapeWrapper.h"
 using namespace std;
 
-
 int main() {
-  
     Display<MyShapeWrapper> display;
     bool isDrawing = false;
     int x1, y1, x2, y2, stepLength = 0, wide = 0;

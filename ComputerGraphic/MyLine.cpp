@@ -22,8 +22,6 @@ void MyLine::BresenhamLine(int x1, int y1, int x2, int y2, int color, int skipLe
     putpixel(x2, y2, color);
 }
 
-
-
 void MyLine::Draws() {
     BresenhamLine(x1_, y1_, x2_, y2_, color_,skipLength_,wide_);
 }

@@ -130,13 +130,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ComputerGraphic.cpp" />
+    <ClCompile Include="MyBezier.cpp" />
     <ClCompile Include="MyCircle.cpp" />
     <ClCompile Include="MyCircle.h" />
     <ClCompile Include="MyLine.cpp" />
+    <ClCompile Include="MyPoly.cpp" />
+    <ClCompile Include="MyShapeWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
-    <ClInclude Include="Drawableobj.h" />
+    <ClInclude Include="MyBezier.h" />
+    <ClInclude Include="MyShapeWrapper.h" />
     <ClInclude Include="MyLine.h" />
     <ClInclude Include="MyPoly.h" />
   </ItemGroup>

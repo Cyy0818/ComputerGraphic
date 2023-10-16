@@ -27,6 +27,15 @@
     <ClCompile Include="MyLine.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MyPoly.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyShapeWrapper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyBezier.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyLine.h">
@@ -35,10 +44,13 @@
     <ClInclude Include="Display.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Drawableobj.h">
+    <ClInclude Include="MyShapeWrapper.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MyPoly.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyBezier.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

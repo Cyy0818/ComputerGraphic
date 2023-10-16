@@ -10,18 +10,11 @@ public:
         : line_(line), isCircle_(false), isLine_(true), isPoly_(false) {}
     MyShapeWrapper(MyPoly poly)
         : poly_(poly), isCircle_(false), isLine_(false), isPoly_(true) {}
-    void Drawobj() {
-        if (isCircle_) {
-            circle_.Draws();
-        }
-        else if (isLine_) {
-            line_.Draws();
-        }
-        else if (isPoly_) {
-            poly_.Draws();
-        }
-      
-    }
+    void Drawobj();
+    void Move(int x, int y);
+    void Rotate(float angle);
+    void Set_Color(int color);
+    void Zoom(int size);
 
 private:
     MyCircle circle_;

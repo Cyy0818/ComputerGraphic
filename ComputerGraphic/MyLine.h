@@ -14,6 +14,7 @@ public:
         : x1_(x1), y1_(y1), x2_(x2), y2_(y2), color_(color), skipLength_(skipLength),wide_(wide) {}
     void BresenhamLine(int x1, int y1, int x2, int y2, int color, int skipLength, int wide);
     void Draws();
+    void move(int x, int y);
 
 private:
     int x1_, y1_, x2_, y2_, color_, skipLength_, wide_;
