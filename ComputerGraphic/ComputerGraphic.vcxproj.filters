@@ -13,45 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\MyBezier">
+      <UniqueIdentifier>{a071a85f-72bc-4671-b73f-cfa0de913f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MyLine">
+      <UniqueIdentifier>{18512c60-a51c-4388-a040-b5ca1697190e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MyBspline">
+      <UniqueIdentifier>{003f772b-2e59-43ba-b0c4-14c24dff8aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MyCircle">
+      <UniqueIdentifier>{ca0cc984-8695-4fb8-81a8-114edfc4bad4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MyPoly">
+      <UniqueIdentifier>{0cc87abc-4071-439e-bce1-647441917abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MyArc">
+      <UniqueIdentifier>{6dde184c-183f-4c45-8cfd-bf0a9969cc9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\MyPhong">
+      <UniqueIdentifier>{1258c06f-ee7d-4ea4-b710-b2bee53029fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComputerGraphic.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="MyCircle.h">
-      <Filter>头文件</Filter>
-    </ClCompile>
-    <ClCompile Include="MyCircle.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="MyBezier.cpp">
+      <Filter>头文件\MyBezier</Filter>
     </ClCompile>
     <ClCompile Include="MyLine.cpp">
-      <Filter>源文件</Filter>
+      <Filter>头文件\MyLine</Filter>
+    </ClCompile>
+    <ClCompile Include="MyBspline.cpp">
+      <Filter>头文件\MyBspline</Filter>
+    </ClCompile>
+    <ClCompile Include="MyBspline.h">
+      <Filter>头文件\MyBspline</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCircle.cpp">
+      <Filter>头文件\MyCircle</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCircle.h">
+      <Filter>头文件\MyCircle</Filter>
     </ClCompile>
     <ClCompile Include="MyPoly.cpp">
-      <Filter>源文件</Filter>
+      <Filter>头文件\MyPoly</Filter>
     </ClCompile>
-    <ClCompile Include="MyShapeWrapper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="MyBezier.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="MyArc.cpp">
+      <Filter>头文件\MyArc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyLine.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Display.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="MyShapeWrapper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="MyPoly.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\MyLine</Filter>
     </ClInclude>
     <ClInclude Include="MyBezier.h">
+      <Filter>头文件\MyBezier</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPoly.h">
+      <Filter>头文件\MyPoly</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationRoot.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcePool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyArc.h">
+      <Filter>头文件\MyArc</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPhong.h">
+      <Filter>头文件\MyPhong</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

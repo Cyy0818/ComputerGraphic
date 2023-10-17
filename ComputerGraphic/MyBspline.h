@@ -3,20 +3,20 @@
 #include<graphics.h>
 #include"ApplicationRoot.h"
 #include<vector>
+#include <iostream>
 
-class MyBezier :public ObjWrapper {
+class MyBspline : public ObjWrapper {
 public:
-    MyBezier() :controlPoints_(), color_(0) {};
-    MyBezier(std::vector<std::pair<double, double>> controlPoints) : controlPoints_(controlPoints) {}
-    // 计算贝塞尔曲线上点的坐标
-    std::pair<double, double> deCasteljau(double t);
+    MyBspline(const std::vector<std::pair<double, double>>& controlPoints, const std::vector<double>& knots, int degree, int color)
+        : controlPoints_(controlPoints), knots_(knots), degree_(degree), color_(color) {}
 
+    std::pair<double, double> calculateBsplinePoint(double t);
     // 遍历所有控制点，判断鼠标点击的点是否在控制点附近
     bool isMouseNearControlPoint(int mouseX, int mouseY) {
         for (const auto& point : controlPoints_) {
             double distance = std::sqrt(std::pow(point.first - mouseX, 2) + std::pow(point.second - mouseY, 2));
             if (distance < 10) {
-                std::cout << "鼠标点击的点在控制点附近" <<std:: endl;
+                std::cout << "鼠标点击的点在控制点附近" << std::endl;
                 return true; // 鼠标点击点在控制点附近
             }
         }
@@ -53,13 +53,13 @@ public:
             }
         }
     }
+    std::vector<Pixel> Draws();
     void plan();
-    
 private:
-    std::vector <Pixel> Draws();
     std::vector<std::pair<double, double>> controlPoints_;
-     // 贝塞尔曲线的控制点
-    // 计算二项式系数
-    int binomialCoefficient(int n, int k);
+    std::vector<double> knots_;
+    int degree_;
     int color_;
+    double basisFunction(int i, int k, double t);
 };
+

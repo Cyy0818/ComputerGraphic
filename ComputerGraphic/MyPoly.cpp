@@ -1,65 +1,135 @@
 #include"MyPoly.h"
 
+std::vector<Pixel> MyPoly:: drawPolygon() {
+    std::vector<Pixel> buffer;
+    for (size_t i = 0; i < vertex_.size(); ++i) {
+        int x0 = static_cast<int>(vertex_[i].first);
+        int y0 = static_cast<int>(vertex_[i].second);
+        int x1 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].first); 
+        int y1 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].second);
+        int dx = abs(x1 - x0);
+        int dy = abs(y1 - y0);
+        int sx = (x0 < x1) ? 1 : -1;
+        int sy = (y0 < y1) ? 1 : -1;
+        int err = dx - dy;
 
-void MyPoly::inputVertices() {
-    std::cout << "输入多边形的顶点数 ";
-    std::cin >> this->num;
-    this->ver = new vertex[num];
-    std::cout << "输入多边形的顶点位置（x,y)" << std::endl;
-    for (int i = 0; i < num; i++) {
-        std::cout << "顶点 " << i + 1 << ": ";
-        std::cin >> this->ver[i].x >> this->ver[i].y;
-    }
-}
-
-void MyPoly:: drawPolygon() {
-    for (int i = 0; i < num; i++) {
-        line(ver[i].x, ver[i].y, ver[(i + 1) % num].x, ver[(i + 1) % num].y);
-    }
-}
-
-void MyPoly:: scanlineFill() {
-    int maxY = 0;
-    for (int i = 0; i < num; i++) {
-        if (ver[i].y > maxY) {
-            maxY = ver[i].y;
-        }
-    }
-
-    for (int y = 0; y < maxY; y++) {
-        int nodes = 0;
-        int xNodes[1000];
-        for (int i = 0; i < num; i++) {
-            int y1 = ver[i].y;
-            int y2 = ver[(i + 1) % num].y;
-            int x1 = ver[i].x;
-            int x2 = ver[(i + 1) % num].x;
-
-            if ((y1 < y2 && y <= y2 && y > y1) || (y1 > y2 && y <= y1 && y > y2)) {
-                xNodes[nodes++] = static_cast<int>(x1 + (x2 - x1) * (y - y1) / (y2 - y1));
+        while (true) {
+            buffer.push_back(Pixel(x0, y0, this->color_));
+            if (x0 == x1 && y0 == y1) {
+                break;
             }
-        }
-
-        // Sort xNodes to get pairs of intersections
-        for (int i = 0; i < nodes - 1; i += 2) {
-            for (int j = 0; j < nodes - i - 2; j += 2) {
-                if (xNodes[j] > xNodes[j + 2]) {
-                    std::swap(xNodes[j], xNodes[j + 2]);
-                    std::swap(xNodes[j + 1], xNodes[j + 3]);
-                }
+            int e2 = 2 * err;
+            if (e2 > -dy) {
+                err -= dy;
+                x0 += sx;
             }
-        }
-
-        // Fill the pixels between pairs of intersections
-        for (int i = 0; i < nodes; i += 2) {
-            for (int j = xNodes[i]; j < xNodes[i + 1]; j++) {
-                putpixel(j, y, color_);
+            if (e2 < dx) {
+                err += dx;
+                y0 += sy;
             }
         }
     }
+
+    return buffer;
 }
 
-void MyPoly::Draws() {
-    this->drawPolygon();
-    this->scanlineFill();
+bool MyPoly::isInsidePolygon(int x, int y) {
+    int intersectCount = 0;
+    for (size_t i = 0; i < vertex_.size(); ++i) {
+        int x1 = static_cast<int>(vertex_[i].first);
+        int y1 = static_cast<int>(vertex_[i].second);
+        int x2 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].first);
+        int y2 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].second);
+
+        // 检查边与射线的交点
+        if (((y1 <= y && y < y2) || (y2 <= y && y < y1)) &&
+            (x < (x2 - x1) * (y - y1) / (y2 - y1) + x1)) {
+            intersectCount++;
+        }
+    }
+    // 如果交点数为奇数，则点在多边形内部
+    return (intersectCount % 2 == 1);
 }
+
+void MyPoly::SeedFill(int startX, int startY, int fillColor) {
+    std::vector<Pixel> buffer;
+    int minY = INT_MAX;
+    int maxY = INT_MIN;
+    color_ = LIGHTBLUE;
+    for (const auto& vertex : vertex_) {
+        int y = static_cast<int>(vertex.second);
+        minY = min(minY, y);
+        maxY = max(maxY, y);
+    }
+    //扫描填充算法
+    for (int y = minY; y <= maxY; ++y) {
+        std::vector<int> intersections;
+
+        // 遍历边
+        for (size_t i = 0; i < vertex_.size(); ++i) {
+            int x0 = static_cast<int>(vertex_[i].first);
+            int y0 = static_cast<int>(vertex_[i].second);
+            int x1 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].first);
+            int y1 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].second);
+
+            // 检查扫描线和边
+            if ((y0 <= y && y1 > y) || (y1 <= y && y0 > y)) {
+                int x = static_cast<int>((static_cast<double>(y - y0) / (y1 - y0)) * (x1 - x0) + x0);
+                intersections.push_back(x);
+            }
+        }
+        std::sort(intersections.begin(), intersections.end());
+        for (size_t i = 0; i < intersections.size(); i += 2) {
+            int startX = intersections[i];
+            int endX = intersections[i + 1];
+            for (int x = startX; x <= endX; ++x) {
+                buffer.push_back(Pixel(x, y, this->color_));
+            }
+        }
+    }
+    ObjWrapper::Points = buffer;
+}
+
+void MyPoly::scanFill() {
+    std::vector<Pixel> buffer;
+    int minY = INT_MAX;
+    int maxY = INT_MIN;
+    color_ = LIGHTRED;
+    for (const auto& vertex : vertex_) {
+        int y = static_cast<int>(vertex.second);
+        minY = min(minY, y);
+        maxY = max(maxY, y);
+    }
+    //扫描填充算法
+    for (int y = minY; y <= maxY; ++y) {
+        std::vector<int> intersections;
+
+        // 遍历边
+        for (size_t i = 0; i < vertex_.size(); ++i) {
+            int x0 = static_cast<int>(vertex_[i].first);
+            int y0 = static_cast<int>(vertex_[i].second);
+            int x1 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].first);
+            int y1 = static_cast<int>(vertex_[(i + 1) % vertex_.size()].second);
+
+            // 检查扫描线和边
+            if ((y0 <= y && y1 > y) || (y1 <= y && y0 > y)) {
+                int x = static_cast<int>((static_cast<double>(y - y0) / (y1 - y0)) * (x1 - x0) + x0);
+                intersections.push_back(x);
+            }
+        }
+        std::sort(intersections.begin(), intersections.end());
+        for (size_t i = 0; i < intersections.size(); i += 2) {
+            int startX = intersections[i];
+            int endX = intersections[i + 1];
+            for (int x = startX; x <= endX; ++x) {
+                buffer.push_back(Pixel(x, y, this->color_));
+            }
+        }
+    }
+    ObjWrapper::Points = buffer;
+}
+
+void MyPoly::plan() {
+    ObjWrapper::Points = this->drawPolygon();
+}
+

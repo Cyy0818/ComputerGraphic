@@ -130,19 +130,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ComputerGraphic.cpp" />
+    <ClCompile Include="MyArc.cpp" />
+    <ClCompile Include="MyBspline.cpp" />
+    <ClCompile Include="MyBspline.h" />
     <ClCompile Include="MyBezier.cpp" />
     <ClCompile Include="MyCircle.cpp" />
     <ClCompile Include="MyCircle.h" />
     <ClCompile Include="MyLine.cpp" />
     <ClCompile Include="MyPoly.cpp" />
-    <ClCompile Include="MyShapeWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Display.h" />
+    <ClInclude Include="ApplicationRoot.h" />
+    <ClInclude Include="MyArc.h" />
     <ClInclude Include="MyBezier.h" />
-    <ClInclude Include="MyShapeWrapper.h" />
     <ClInclude Include="MyLine.h" />
+    <ClInclude Include="MyPhong.h" />
     <ClInclude Include="MyPoly.h" />
+    <ClInclude Include="ResourcePool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

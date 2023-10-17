@@ -10,6 +10,9 @@ void MyShapeWrapper::Drawobj() {
     else if (isPoly_) {
         poly_.Draws();
     }
+    else if (isBspline_) {
+        bspline_.Draws();
+    }
 }
 
 void MyShapeWrapper::Move(int x, int y) {
@@ -68,4 +71,26 @@ void MyShapeWrapper::Set_Color(int color) {
         line_.color_ = color;
     else if (isPoly_)
         poly_.color_ = color;
+}
+
+
+void MyShapeWrapper::Zoom(int sizex, int sizey) {
+    if (isCircle_)
+        circle_.r_ = sizex * circle_.r_;
+    else if (isLine_) {
+        line_.x1_ = sizex * line_.x1_;
+        line_.x2_ = sizex * line_.x2_;
+        line_.y1_ = sizex * line_.y1_;
+        line_.y2_ = sizex * line_. y2_;
+
+
+    }
+    else if (isPoly_) {
+        for (int i = 0; i < poly_.num; i++) {
+            poly_.ver[i].x = round(sizex * poly_.ver[i].x);
+            poly_.ver[i].y = round(sizey * poly_.ver[i].y);
+        }
+    }
+        
+
 }
