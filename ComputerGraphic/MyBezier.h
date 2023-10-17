@@ -7,7 +7,7 @@
 using namespace std;
 class MyBezier {
 public:
-    // 构造函数，初始化控制点
+   
     MyBezier(vector<pair<double, double>> controlPoints) : controlPoints_(controlPoints) {}
 
     // 计算贝塞尔曲线上点的坐标
