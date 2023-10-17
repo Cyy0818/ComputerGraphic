@@ -8,6 +8,7 @@ using namespace std;
 class MyBezier {
 public:
    
+    MyBezier() :controlPoints_(), color_(0) {};
     MyBezier(vector<pair<double, double>> controlPoints) : controlPoints_(controlPoints) {}
 
     // 计算贝塞尔曲线上点的坐标
